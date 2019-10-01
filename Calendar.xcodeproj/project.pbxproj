@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,8 @@
 		7AB0F18A2342AC0300320DBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AB0F1882342AC0300320DBD /* Main.storyboard */; };
 		7AB0F18C2342AC0500320DBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AB0F18B2342AC0500320DBD /* Assets.xcassets */; };
 		7AB0F18F2342AC0500320DBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AB0F18D2342AC0500320DBD /* LaunchScreen.storyboard */; };
+		7AB0F1972342AFAB00320DBD /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB0F1962342AFAB00320DBD /* CalendarCell.swift */; };
+		7AB0F1992342BDB000320DBD /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB0F1982342BDB000320DBD /* ViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		7AB0F18B2342AC0500320DBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7AB0F18E2342AC0500320DBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7AB0F1902342AC0500320DBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AB0F1962342AFAB00320DBD /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		7AB0F1982342BDB000320DBD /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		907FA6B1B7ABB32D7736BE4E /* Pods_Calendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Calendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF87C42563CA668CB1344EE1 /* Pods-Calendar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calendar.release.xcconfig"; path = "Target Support Files/Pods-Calendar/Pods-Calendar.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +74,8 @@
 				7AB0F18B2342AC0500320DBD /* Assets.xcassets */,
 				7AB0F18D2342AC0500320DBD /* LaunchScreen.storyboard */,
 				7AB0F1902342AC0500320DBD /* Info.plist */,
+				7AB0F1962342AFAB00320DBD /* CalendarCell.swift */,
+				7AB0F1982342BDB000320DBD /* ViewControllerExtension.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -80,7 +86,6 @@
 				5994AE1A605AB78C0146B8E3 /* Pods-Calendar.debug.xcconfig */,
 				BF87C42563CA668CB1344EE1 /* Pods-Calendar.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -210,6 +215,8 @@
 				7AB0F1872342AC0300320DBD /* ViewController.swift in Sources */,
 				7AB0F1832342AC0300320DBD /* AppDelegate.swift in Sources */,
 				7AB0F1852342AC0300320DBD /* SceneDelegate.swift in Sources */,
+				7AB0F1992342BDB000320DBD /* ViewControllerExtension.swift in Sources */,
+				7AB0F1972342AFAB00320DBD /* CalendarCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

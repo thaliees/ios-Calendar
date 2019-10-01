@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Calendar
 //
-//  Created by SoftwareRB on 9/30/19.
+//  Created by Thaliees on 9/30/19.
 //  Copyright © 2019 Thaliees. All rights reserved.
 //
 
