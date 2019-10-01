@@ -19,3 +19,4 @@ $ pod install
 * Custom Calendar Creation
 * Selected or deselected cell
 * Header: Month
+* Adding events: DotView and Information from Server

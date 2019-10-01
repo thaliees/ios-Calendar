@@ -37,11 +37,11 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0lk-KD-Yyf">
-                                                    <rect key="frame" x="28.5" y="5" width="40" height="40"/>
+                                                    <rect key="frame" x="33.5" y="10" width="30" height="30"/>
                                                     <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="e9z-Sk-q7F"/>
-                                                        <constraint firstAttribute="width" constant="40" id="wze-6D-xae"/>
+                                                        <constraint firstAttribute="height" constant="30" id="e9z-Sk-q7F"/>
+                                                        <constraint firstAttribute="width" constant="30" id="wze-6D-xae"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvc-RN-vHR">
@@ -50,16 +50,27 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R6Q-M5-lUo">
+                                                    <rect key="frame" x="45.5" y="44" width="6" height="6"/>
+                                                    <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="6" id="CM0-oS-zRh"/>
+                                                        <constraint firstAttribute="width" constant="6" id="TgH-fT-gpQ"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="mvc-RN-vHR" firstAttribute="centerX" secondItem="SB3-jE-fXs" secondAttribute="centerX" id="5Xe-Ho-bMb"/>
+                                                <constraint firstAttribute="bottom" secondItem="R6Q-M5-lUo" secondAttribute="bottom" id="FKe-zI-zZR"/>
                                                 <constraint firstItem="0lk-KD-Yyf" firstAttribute="centerX" secondItem="SB3-jE-fXs" secondAttribute="centerX" id="QKJ-59-qah"/>
                                                 <constraint firstItem="mvc-RN-vHR" firstAttribute="centerY" secondItem="SB3-jE-fXs" secondAttribute="centerY" id="eiX-MM-NDb"/>
+                                                <constraint firstItem="R6Q-M5-lUo" firstAttribute="centerX" secondItem="SB3-jE-fXs" secondAttribute="centerX" id="jht-Kr-iSK"/>
                                                 <constraint firstItem="0lk-KD-Yyf" firstAttribute="centerY" secondItem="SB3-jE-fXs" secondAttribute="centerY" id="sfF-jW-gVE"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="dateLabel" destination="mvc-RN-vHR" id="X8z-2T-agG"/>
+                                            <outlet property="dotView" destination="R6Q-M5-lUo" id="1QS-p3-ooB"/>
                                             <outlet property="selectedView" destination="0lk-KD-Yyf" id="UPj-Fg-SCF"/>
                                         </connections>
                                     </collectionViewCell>
@@ -97,6 +108,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="calendarView" destination="4wg-eL-v5c" id="EI8-CK-FOU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

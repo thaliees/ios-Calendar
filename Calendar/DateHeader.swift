@@ -2,7 +2,7 @@
 //  DateHeader.swift
 //  Calendar
 //
-//  Created by SoftwareRB on 10/1/19.
+//  Created by Thaliees on 10/1/19.
 //  Copyright © 2019 Thaliees. All rights reserved.
 //
 

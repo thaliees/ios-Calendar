@@ -12,4 +12,5 @@ import UIKit
 class CalendarCell: JTACDayCell {
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var selectedView: UIView!
+    @IBOutlet var dotView: UIView!
 }
