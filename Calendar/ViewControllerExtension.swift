@@ -58,4 +58,17 @@ extension ViewController: JTACMonthViewDelegate {
     func calendar(_ calendar: JTACMonthView, shouldSelectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) -> Bool {
         return true // Based on a criteria, return true or false
     }
+    
+    func calendar(_ calendar: JTACMonthView, headerViewForDateRange range: (start: Date, end: Date), at indexPath: IndexPath) -> JTACMonthReusableView {
+        let formatter = DateFormatter()  // Declare this outside, to avoid instancing this heavy class multiple times.
+        formatter.dateFormat = "MMMM"
+        
+        let header = calendar.dequeueReusableJTAppleSupplementaryView(withReuseIdentifier: "dateHeader", for: indexPath) as! DateHeader
+        header.monthTitle.text = formatter.string(from: range.start)
+        return header
+    }
+
+    func calendarSizeForMonths(_ calendar: JTACMonthView?) -> MonthSize? {
+        return MonthSize(defaultSize: 50)
+    }
 }

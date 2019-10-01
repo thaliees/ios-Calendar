@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		496E06EA99DF954F057A854E /* Pods_Calendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 907FA6B1B7ABB32D7736BE4E /* Pods_Calendar.framework */; };
+		7A8F86392343D84B006A87EB /* DateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8F86382343D84B006A87EB /* DateHeader.swift */; };
 		7AB0F1832342AC0300320DBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB0F1822342AC0300320DBD /* AppDelegate.swift */; };
 		7AB0F1852342AC0300320DBD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB0F1842342AC0300320DBD /* SceneDelegate.swift */; };
 		7AB0F1872342AC0300320DBD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB0F1862342AC0300320DBD /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		5994AE1A605AB78C0146B8E3 /* Pods-Calendar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calendar.debug.xcconfig"; path = "Target Support Files/Pods-Calendar/Pods-Calendar.debug.xcconfig"; sourceTree = "<group>"; };
+		7A8F86382343D84B006A87EB /* DateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeader.swift; sourceTree = "<group>"; };
 		7AB0F17F2342AC0300320DBD /* Calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB0F1822342AC0300320DBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AB0F1842342AC0300320DBD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				7AB0F1902342AC0500320DBD /* Info.plist */,
 				7AB0F1962342AFAB00320DBD /* CalendarCell.swift */,
 				7AB0F1982342BDB000320DBD /* ViewControllerExtension.swift */,
+				7A8F86382343D84B006A87EB /* DateHeader.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A8F86392343D84B006A87EB /* DateHeader.swift in Sources */,
 				7AB0F1872342AC0300320DBD /* ViewController.swift in Sources */,
 				7AB0F1832342AC0300320DBD /* AppDelegate.swift in Sources */,
 				7AB0F1852342AC0300320DBD /* SceneDelegate.swift in Sources */,
