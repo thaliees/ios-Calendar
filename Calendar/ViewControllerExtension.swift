@@ -35,7 +35,6 @@ extension ViewController: JTACMonthViewDataSource {
     }
 }
 
-
 extension ViewController: JTACMonthViewDelegate {
     func calendar(_ calendar: JTACMonthView, willDisplay cell: JTACDayCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         configureCell(view: cell, cellState: cellState)
@@ -47,24 +46,16 @@ extension ViewController: JTACMonthViewDelegate {
         return cell
     }
     
-    func configureCell(view: JTACDayCell?, cellState: CellState) {
-        guard let cell = view as? CalendarCell else { return }
-        cell.dateLabel.text = cellState.text
-        handleCellTextColor(cell: cell, cellState: cellState)
+    func calendar(_ calendar: JTACMonthView, didSelectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) {
+        configureCell(view: cell, cellState: cellState)
     }
     
-    func handleCellTextColor(cell: CalendarCell, cellState: CellState) {
-        if cellState.dateBelongsTo == .thisMonth {
-            cell.dateLabel.textColor = UIColor.black
-        }
-        else {
-            cell.dateLabel.textColor = UIColor.gray
-        }
-        // Or you can also make them hidden.
-        /*if cellState.dateBelongsTo == .thisMonth {
-            cell.isHidden = false
-        } else {
-            cell.isHidden = true
-        }*/
+    func calendar(_ calendar: JTACMonthView, didDeselectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) {
+        
+        configureCell(view: cell, cellState: cellState)
+    }
+    
+    func calendar(_ calendar: JTACMonthView, shouldSelectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) -> Bool {
+        return true // Based on a criteria, return true or false
     }
 }

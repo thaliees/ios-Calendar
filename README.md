@@ -16,4 +16,5 @@ pod 'JTAppleCalendar'
 $ pod install
 
 ## Project Base.
-Custom Calendar Creation
+* Custom Calendar Creation
+* Selected or deselected cell
