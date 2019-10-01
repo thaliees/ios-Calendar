@@ -20,3 +20,4 @@ $ pod install
 * Selected or deselected cell
 * Header: Month
 * Adding events: DotView and Information from Server
+* Move to Current month

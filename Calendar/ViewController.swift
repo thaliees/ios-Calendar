@@ -25,6 +25,11 @@ class ViewController: UIViewController {
         populateDataSource()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        calendarView.scrollToDate(Date())
+    }
+    
     func populateDataSource() {
         // You can get the data from a server.
         // Then convert that data into a form that can be used by the calendar.

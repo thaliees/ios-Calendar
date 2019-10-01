@@ -27,7 +27,7 @@ extension ViewController: JTACMonthViewDataSource {
         cEndDate.day = 1
         
         // Indicate the initial date
-        let startDate = Date() //calendar.date(from: cStartDate)!
+        let startDate = calendar.date(from: cStartDate)!
         // Indicate the end date
         let endDate = calendar.date(from: cEndDate)!
         
