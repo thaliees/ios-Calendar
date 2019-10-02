@@ -77,8 +77,8 @@
 				7AB0F18D2342AC0500320DBD /* LaunchScreen.storyboard */,
 				7AB0F1902342AC0500320DBD /* Info.plist */,
 				7AB0F1962342AFAB00320DBD /* CalendarCell.swift */,
-				7AB0F1982342BDB000320DBD /* ViewControllerExtension.swift */,
 				7A8F86382343D84B006A87EB /* DateHeader.swift */,
+				7AB0F1982342BDB000320DBD /* ViewControllerExtension.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";

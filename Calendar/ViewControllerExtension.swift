@@ -63,12 +63,25 @@ extension ViewController: JTACMonthViewDelegate {
         let formatter = DateFormatter()  // Declare this outside, to avoid instancing this heavy class multiple times.
         formatter.dateFormat = "MMMM"
         
+        // We obtain the calendar width (according to the device)
+        // and divide it between 7 days of the week
+        let width = calendar.frame.size.width
+        let widthDay = width / 7
+        
         let header = calendar.dequeueReusableJTAppleSupplementaryView(withReuseIdentifier: "dateHeader", for: indexPath) as! DateHeader
         header.monthTitle.text = formatter.string(from: range.start)
+        header.sunday.constant = widthDay
+        header.monday.constant = widthDay
+        header.tuesday.constant = widthDay
+        header.wednesday.constant = widthDay
+        header.thursday.constant = widthDay
+        header.friday.constant = widthDay
+        header.saturday.constant = widthDay
+        
         return header
     }
 
     func calendarSizeForMonths(_ calendar: JTACMonthView?) -> MonthSize? {
-        return MonthSize(defaultSize: 50)
+        return MonthSize(defaultSize: 55)
     }
 }

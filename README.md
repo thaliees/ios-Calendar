@@ -21,3 +21,4 @@ $ pod install
 * Header: Month
 * Adding events: DotView and Information from Server
 * Move to Current month
+* Header for the days of the week
