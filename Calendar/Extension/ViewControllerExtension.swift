@@ -9,6 +9,9 @@
 import UIKit
 import JTAppleCalendar
 
+var initDate:Date = Date()
+var finalDate:Date = Date()
+
 extension ViewController: JTACMonthViewDataSource {
     func configureCalendar(_ calendar: JTACMonthView) -> ConfigurationParameters {
         // Get current date
@@ -27,11 +30,11 @@ extension ViewController: JTACMonthViewDataSource {
         cEndDate.day = 1
         
         // Indicate the initial date
-        let startDate = calendar.date(from: cStartDate)!
+        initDate = calendar.date(from: cStartDate)!
         // Indicate the end date
-        let endDate = calendar.date(from: cEndDate)!
+        finalDate = calendar.date(from: cEndDate)!
         
-        return ConfigurationParameters(startDate: startDate, endDate: endDate)
+        return ConfigurationParameters(startDate: initDate, endDate: finalDate)
     }
 }
 
@@ -47,21 +50,24 @@ extension ViewController: JTACMonthViewDelegate {
     }
     
     func calendar(_ calendar: JTACMonthView, didSelectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) {
-        configureCell(view: cell, cellState: cellState)
+        configureCellSelected(view: cell, cellState: cellState)
     }
     
     func calendar(_ calendar: JTACMonthView, didDeselectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) {
-        
-        configureCell(view: cell, cellState: cellState)
+        configureCellSelected(view: cell, cellState: cellState)
     }
     
     func calendar(_ calendar: JTACMonthView, shouldSelectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) -> Bool {
         return true // Based on a criteria, return true or false
     }
     
+    func calendar(_ calendar: JTACMonthView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
+        handleGuideMonth(numberMonth: calendar.currentSection()!)
+    }
+    
     func calendar(_ calendar: JTACMonthView, headerViewForDateRange range: (start: Date, end: Date), at indexPath: IndexPath) -> JTACMonthReusableView {
         let formatter = DateFormatter()  // Declare this outside, to avoid instancing this heavy class multiple times.
-        formatter.dateFormat = "MMMM"
+        formatter.dateFormat = CustomerDateFormat.FORMATTER_NAME_MONTH
         
         // We obtain the calendar width (according to the device)
         // and divide it between 7 days of the week

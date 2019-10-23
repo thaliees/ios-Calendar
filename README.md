@@ -20,5 +20,10 @@ $ pod install
 * Selected or deselected cell
 * Header: Month
 * Adding events: DotView and Information from Server
-* Move to Current month
 * Header for the days of the week
+* Show a Guide to the Events marked on the Calendar
+
+## Additional features
+* Class creation for: Handling Date Formats
+* Class creation to: Create colors from a Hex
+* Model Creation to simulate data obtained from a server
