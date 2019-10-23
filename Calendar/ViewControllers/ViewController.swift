@@ -14,14 +14,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     private let FormatterDate:DateFormatter = DateFormatter()
     private var isExpanded = false
     private var keyDate:String = ""
-    
+    private var selectedDateByUser = Date()
     private var data:[CalendarEventInfo] = [CalendarEventInfo]()
     private var dictionaryDots:[String:[String]] = [:]
     private var dictionaryEvents:[String:[ScheduledEvents]] = [:]
     
     @IBOutlet weak var calendarCollection: JTACMonthView!
     @IBOutlet weak var guideCollection: UICollectionView!
+    @IBOutlet weak var guide: UIButton!
     @IBOutlet weak var heightCalendar: NSLayoutConstraint!
+    @IBOutlet weak var heightCollectionDate: NSLayoutConstraint!
+    @IBOutlet weak var heightGuide: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +42,36 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         else {
             isExpanded = true
             setHeightGuide()
+        }
+    }
+    
+    @IBAction func resizeCalendarAction(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == UISwipeGestureRecognizer.Direction.down {
+            sender.direction = UISwipeGestureRecognizer.Direction.up
+            numberOfRows = 6
+            heightCalendar.constant = 310
+            heightCollectionDate.constant = 270
+            heightGuide.constant = 27
+            hiddenViews(value: false)
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.layoutIfNeeded()
+                self.updateCollection(date: self.selectedDateByUser)
+            })
+        }
+        else if sender.direction == UISwipeGestureRecognizer.Direction.up {
+            sender.direction = UISwipeGestureRecognizer.Direction.down
+            numberOfRows = 1
+            heightCalendar.constant = 100
+            heightCollectionDate.constant = 90
+            heightGuide.constant = 0
+            hiddenViews(value: true)
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.layoutIfNeeded()
+            }) { completed in
+                self.calendarCollection.reloadData(withAnchor: self.selectedDateByUser)
+            }
         }
     }
     
@@ -194,6 +227,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         else { heightCalendar.constant = 310 }
     }
     
+    private func hiddenViews(value: Bool) {
+        guide.isHidden = value
+        guideCollection.isHidden = value
+    }
+    
     func configureCell(view: JTACDayCell?, cellState: CellState) {
         guard let cell = view as? CalendarCell else { return }
         cell.dateLabel.text = cellState.text
@@ -236,6 +274,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             cell.dotView1.isHidden = true
             cell.dotView2.isHidden = true
             cell.dotView3.isHidden = true
+            selectedDateByUser = cellState.date
         } else {
             cell.selectedView.isHidden = true
             handleDots(cell: cell, cellState: cellState)

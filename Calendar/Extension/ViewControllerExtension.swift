@@ -11,6 +11,7 @@ import JTAppleCalendar
 
 var initDate:Date = Date()
 var finalDate:Date = Date()
+var numberOfRows:Int = 6
 
 extension ViewController: JTACMonthViewDataSource {
     func configureCalendar(_ calendar: JTACMonthView) -> ConfigurationParameters {
@@ -34,7 +35,11 @@ extension ViewController: JTACMonthViewDataSource {
         // Indicate the end date
         finalDate = calendar.date(from: cEndDate)!
         
-        return ConfigurationParameters(startDate: initDate, endDate: finalDate)
+        if numberOfRows == 6 {
+            return ConfigurationParameters(startDate: initDate, endDate: finalDate, numberOfRows: numberOfRows, calendar: calendar, generateInDates: .forAllMonths, generateOutDates: .tillEndOfRow, firstDayOfWeek: .sunday, hasStrictBoundaries: false)
+        }
+        
+        return ConfigurationParameters(startDate: initDate, endDate: finalDate, numberOfRows: numberOfRows, calendar: calendar, generateInDates: .forAllMonths, generateOutDates: .off, firstDayOfWeek: .sunday, hasStrictBoundaries: false)
     }
 }
 

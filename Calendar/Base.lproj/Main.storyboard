@@ -204,6 +204,9 @@
                                     </collectionView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONa-mA-y78">
                                         <rect key="frame" x="16" y="272" width="68" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="27" id="ZQS-b5-n4c"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="Show Guide"/>
                                         <connections>
@@ -279,20 +282,32 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="nWG-Il-hzk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="CnM-07-yXg"/>
                             <constraint firstItem="nWG-Il-hzk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="TpG-lj-Rsn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nWG-Il-hzk" secondAttribute="trailing" constant="16" id="hAc-e6-0NS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="aKM-af-BjE" appends="YES" id="6yg-4Y-tGC"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="calendarCollection" destination="4wg-eL-v5c" id="EI8-CK-FOU"/>
+                        <outlet property="guide" destination="ONa-mA-y78" id="6YV-z0-nYn"/>
                         <outlet property="guideCollection" destination="pDc-Lf-Ame" id="XQP-Dd-Q5F"/>
                         <outlet property="heightCalendar" destination="0tq-an-OOW" id="CQd-cK-NWr"/>
+                        <outlet property="heightCollectionDate" destination="PiJ-fR-7Sj" id="Gxl-Q7-Vt1"/>
+                        <outlet property="heightGuide" destination="ZQS-b5-n4c" id="TPw-6d-zsr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="up" id="aKM-af-BjE">
+                    <connections>
+                        <action selector="resizeCalendarAction:" destination="BYZ-38-t0r" id="UPA-B3-amC"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="102.45535714285714"/>
         </scene>

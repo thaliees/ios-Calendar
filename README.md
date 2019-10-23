@@ -22,6 +22,7 @@ $ pod install
 * Adding events: DotView and Information from Server
 * Header for the days of the week
 * Show a Guide to the Events marked on the Calendar
+* Calendar view mode: Month or Week
 
 ## Additional features
 * Class creation for: Handling Date Formats
