@@ -85,7 +85,7 @@
 				7AB0F1902342AC0500320DBD /* Info.plist */,
 				7AFAABA7235FB02A00CB5A0A /* CustomerDateFormat.swift */,
 				7AFAABAC235FB1D700CB5A0A /* Models */,
-				7AFAABAB235FB1A700CB5A0A /* ViewControllers */,
+				7AFAABAB235FB1A700CB5A0A /* Controllers */,
 				7AFAABA4235FABEC00CB5A0A /* Extension */,
 			);
 			path = Calendar;
@@ -100,7 +100,7 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		7AFAABAB235FB1A700CB5A0A /* ViewControllers */ = {
+		7AFAABAB235FB1A700CB5A0A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				7AB0F1862342AC0300320DBD /* ViewController.swift */,
@@ -108,7 +108,7 @@
 				7A8F86382343D84B006A87EB /* DateHeader.swift */,
 				7A30164D235FC00B00025B1D /* GuideCollectionViewCell.swift */,
 			);
-			path = ViewControllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		7AFAABAC235FB1D700CB5A0A /* Models */ = {

@@ -28,3 +28,4 @@ $ pod install
 * Class creation for: Handling Date Formats
 * Class creation to: Create colors from a Hex
 * Model Creation to simulate data obtained from a server
+* Mark current date

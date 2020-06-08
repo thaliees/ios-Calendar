@@ -21,4 +21,12 @@ class CustomerDateFormat {
         formatter.dateFormat = "dd-MMM-yyyy'T'HH:mm:ss.SSS'Z'"
         return formatter
     }
+    
+    static func convertDateString(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = FORMATTER_DATE
+        
+        let dateString = formatter.string(from: date)
+        return dateString
+    }
 }

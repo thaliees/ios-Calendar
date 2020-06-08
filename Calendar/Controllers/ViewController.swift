@@ -56,7 +56,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             UIView.animate(withDuration: 0.2, animations: {
                 self.view.layoutIfNeeded()
-                self.updateCollection(date: self.selectedDateByUser)
+                self.setHeightGuide()
+                self.calendarCollection.reloadData(withAnchor: self.selectedDateByUser)
             })
         }
         else if sender.direction == UISwipeGestureRecognizer.Direction.up {
@@ -78,6 +79,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     private func configureCollection() {
         calendarCollection.scrollDirection = .horizontal
         calendarCollection.selectDates([Date()])
+        
+        // Initialize the dates covered by the calendar as well as the number of rows
+        startDate = Calendar.current.date(from: createDateComponent(addMonth: -3, addDays: false))!
+        finalDate = Calendar.current.date(from: createDateComponent(addMonth: 12, addDays: true))!
+        numberOfRows = 6
     }
     
     private func getDataServer() {
@@ -89,19 +95,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         list.append(event)
         event = ScheduledEvents(id: "2", title: "Event 2", color: "#9F10F2FF")
         list.append(event)
-        var eventInfo = CalendarEventInfo(date: "25-Oct-2019T00:00:00.000Z", events: list)
+        var eventInfo = CalendarEventInfo(date: "25-Jun-2020T00:00:00.000Z", events: list)
         data.append(eventInfo)
         
         list = [ScheduledEvents]()
         event = ScheduledEvents(id: "3", title: "Event 3", color: "#9F10F2FF")
         list.append(event)
-        eventInfo = CalendarEventInfo(date: "15-Nov-2019T00:00:00.000Z", events: list)
+        eventInfo = CalendarEventInfo(date: "15-Jul-2020T00:00:00.000Z", events: list)
         data.append(eventInfo)
         
         list = [ScheduledEvents]()
         event = ScheduledEvents(id: "4", title: "Event 4", color: "#9F10F2FF")
         list.append(event)
-        eventInfo = CalendarEventInfo(date: "15-Dec-2019T00:00:00.000Z", events: list)
+        eventInfo = CalendarEventInfo(date: "15-Sep-2020T00:00:00.000Z", events: list)
         data.append(eventInfo)
         
         list = [ScheduledEvents]()
@@ -111,7 +117,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         list.append(event)
         event = ScheduledEvents(id: "7", title: "Event 7", color: "#16E484FF")
         list.append(event)
-        eventInfo = CalendarEventInfo(date: "21-Dec-2019T00:00:00.000Z", events: list)
+        eventInfo = CalendarEventInfo(date: "21-Nov-2020T00:00:00.000Z", events: list)
         data.append(eventInfo)
         
         // From the data obtained from the server, we will create the dictionaries
@@ -164,11 +170,80 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         
         // We update the guide
-        updateGuide(date: createDateComponent(addMonth: 0, from: Date()))
+        setKeyGuide(date: createDateComponent(addMonth: 0, addDays: false))
     }
     
-    private func createDateComponent(addMonth: Int, from date: Date) -> DateComponents {
-        let components = Calendar.current.dateComponents([Calendar.Component.year, Calendar.Component.month], from: date)
+    private func setHeightGuide() {
+        guideCollection.isHidden = true
+        
+        if numberOfRows == 6 {
+            if dictionaryEvents[keyDate] == nil || dictionaryEvents[keyDate]!.count <= 4 {
+                heightCalendar.constant = 320
+            }
+            else if dictionaryEvents[keyDate]!.count > 4 && dictionaryEvents[keyDate]!.count <= 8 {
+                heightCalendar.constant = 335
+            }
+            else {
+                heightCalendar.constant = 350
+            }
+            
+            if isExpanded {
+                guideCollection.isHidden = false
+                guideCollection.reloadData()
+            }
+            else { heightCalendar.constant = 310 }
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    private func hiddenViews(value: Bool) {
+        guide.isHidden = value
+        guideCollection.isHidden = value
+    }
+    
+    // MARK: - Calendar Extension
+    func handleDots(cell: CalendarCell, cellState: CellState) {
+        let dateString = CustomerDateFormat.convertDateString(date: cellState.date)
+        
+        if dictionaryDots[dateString] == nil {
+            cell.dotView1.isHidden = true
+            cell.dotView2.isHidden = true
+            cell.dotView3.isHidden = true
+        }
+        else {
+            if dictionaryDots[dateString]!.count == 1 {
+                cell.dotView2.isHidden = false
+                cell.dotView2.backgroundColor = UIColor(hex: dictionaryDots[dateString]![0])
+            }
+            else if dictionaryDots[dateString]!.count == 2 {
+                cell.dotView1.isHidden = false
+                cell.dotView1.backgroundColor = UIColor(hex: dictionaryDots[dateString]![0])
+                cell.dotView2.isHidden = false
+                cell.dotView2.backgroundColor = UIColor(hex: dictionaryDots[dateString]![1])
+            }
+            else {
+                cell.dotView1.isHidden = false
+                cell.dotView1.backgroundColor = UIColor(hex: dictionaryDots[dateString]![0])
+                cell.dotView2.isHidden = false
+                cell.dotView2.backgroundColor = UIColor(hex: dictionaryDots[dateString]![1])
+                cell.dotView3.isHidden = false
+                cell.dotView3.backgroundColor = UIColor(hex: dictionaryDots[dateString]![2])
+            }
+        }
+    }
+    
+    func handleGuideMonth(numberMonth: Int) {
+        let dComponent = createDateComponent(addMonth: numberMonth, addDays: false)
+        setKeyGuide(date: dComponent)
+    }
+    
+    func handleSelectedDate(date: Date) {
+        // If you need to make the request again, here you could.
+    }
+    
+    // MARK: - Methods for Calendar Settings
+    private func createDateComponent(addMonth: Int, addDays: Bool) -> DateComponents {
+        let components = Calendar.current.dateComponents([Calendar.Component.year, Calendar.Component.month], from: Date())
         var month = components.month! + addMonth
         var year = components.year!
         
@@ -184,137 +259,37 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         var dComponents = DateComponents()
         dComponents.year = year
         dComponents.month = month
-        dComponents.day = 1
+        if addDays { dComponents.day = days(month: month, year: year) }
+        else { dComponents.day = 1 }
         
         return dComponents
     }
     
-    private func updateGuide(date: DateComponents) {
+    private func days(month:Int, year: Int) -> Int {
+        if month == 2 {
+            if year % 4 == 0 && (year % 100 != 0 || year % 400 == 0) { return 29 }
+            return 28
+        }
+        
+        if month == 0 || month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 {
+            return 31
+        }
+        
+        return 30
+    }
+    
+    private func setKeyGuide(date: DateComponents) {
         // As we define the key of the guide in month and year, we indicate to the FormatterDate
         FormatterDate.dateFormat = CustomerDateFormat.FORMATTER_DATE_SHORT
         // We get a date from the DateComponents
-        let guideDate = Calendar.current.date(from: date)
+        let guide = Calendar.current.date(from: date)
         // We assign the value to the variable, which is responsible for being key to iterate our dictionary
-        keyDate = FormatterDate.string(from: guideDate!)
+        keyDate = FormatterDate.string(from: guide!)
+        
         // Update collections
-        updateCollection(date: guideDate!)
-    }
-    
-    private func updateCollection(date: Date) {
-        calendarCollection.reloadData(withAnchor: date)
         guideCollection.reloadData()
         //We set the height of the view
         setHeightGuide()
-    }
-    
-    private func setHeightGuide() {
-        guideCollection.isHidden = true
-        
-        if dictionaryEvents[keyDate] == nil || dictionaryEvents[keyDate]!.count <= 4 {
-            heightCalendar.constant = 320
-        }
-        else if dictionaryEvents[keyDate]!.count > 4 && dictionaryEvents[keyDate]!.count <= 8 {
-            heightCalendar.constant = 335
-        }
-        else {
-            heightCalendar.constant = 350
-        }
-        
-        if isExpanded {
-            guideCollection.isHidden = false
-            guideCollection.reloadData()
-        }
-        else { heightCalendar.constant = 310 }
-    }
-    
-    private func hiddenViews(value: Bool) {
-        guide.isHidden = value
-        guideCollection.isHidden = value
-    }
-    
-    func configureCell(view: JTACDayCell?, cellState: CellState) {
-        guard let cell = view as? CalendarCell else { return }
-        cell.dateLabel.text = cellState.text
-        
-        handleViews(cell: cell, cellState: cellState)
-        handleTextColor(cell: cell, cellState: cellState)
-        handleSelected(cell: cell, cellState: cellState)
-    }
-    
-    func configureCellSelected(view: JTACDayCell?, cellState: CellState) {
-        guard let cell = view as? CalendarCell else { return }
-        
-        handleTextColor(cell: cell, cellState: cellState)
-        handleSelected(cell: cell, cellState: cellState)
-    }
-    
-    func handleViews(cell: CalendarCell, cellState: CellState) {
-        cell.dotView1.layer.cornerRadius = cell.dotView1.frame.width / 2
-        cell.dotView2.layer.cornerRadius = cell.dotView2.frame.width / 2
-        cell.dotView3.layer.cornerRadius = cell.dotView3.frame.width / 2
-        cell.selectedView.layer.cornerRadius = cell.selectedView.frame.width / 2
-    }
-    
-    func handleTextColor(cell: CalendarCell, cellState: CellState) {
-        if cellState.dateBelongsTo == .thisMonth { cell.dateLabel.textColor = UIColor.black }
-        else { cell.dateLabel.textColor = UIColor.gray }
-        
-        // Or you can also make them hidden.
-        /*if cellState.dateBelongsTo == .thisMonth {
-            cell.isHidden = false
-        } else {
-            cell.isHidden = true
-        }*/
-    }
-    
-    func handleSelected(cell: CalendarCell, cellState: CellState) {
-        if cellState.isSelected {
-            cell.dateLabel.textColor = UIColor.white
-            cell.selectedView.isHidden = false
-            cell.dotView1.isHidden = true
-            cell.dotView2.isHidden = true
-            cell.dotView3.isHidden = true
-            selectedDateByUser = cellState.date
-        } else {
-            cell.selectedView.isHidden = true
-            handleDots(cell: cell, cellState: cellState)
-        }
-    }
-    
-    func handleDots(cell: CalendarCell, cellState: CellState) {
-        FormatterDate.dateFormat = CustomerDateFormat.FORMATTER_DATE
-        let dateString = FormatterDate.string(from: cellState.date)
-        
-        if dictionaryDots[dateString] == nil {
-            cell.dotView1.isHidden = true
-            cell.dotView2.isHidden = true
-            cell.dotView3.isHidden = true
-        }
-        else {
-            if dictionaryDots[dateString]!.count >= 3 {
-                cell.dotView1.isHidden = false
-                cell.dotView1.backgroundColor = UIColor(hex: dictionaryDots[dateString]![0])
-                cell.dotView2.isHidden = false
-                cell.dotView2.backgroundColor = UIColor(hex: dictionaryDots[dateString]![1])
-                cell.dotView3.isHidden = false
-                cell.dotView3.backgroundColor = UIColor(hex: dictionaryDots[dateString]![2])
-            }
-            else if dictionaryDots[dateString]!.count >= 2 {
-                cell.dotView1.isHidden = false
-                cell.dotView1.backgroundColor = UIColor(hex: dictionaryDots[dateString]![0])
-                cell.dotView2.isHidden = false
-                cell.dotView2.backgroundColor = UIColor(hex: dictionaryDots[dateString]![1])
-            }
-            else {
-                cell.dotView2.isHidden = false
-                cell.dotView2.backgroundColor = UIColor(hex: dictionaryDots[dateString]![0])
-            }
-        }
-    }
-    
-    func handleGuideMonth(numberMonth: Int) {
-        let dComponent = createDateComponent(addMonth: numberMonth, from: initDate)
-        updateGuide(date: dComponent)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
